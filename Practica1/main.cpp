@@ -12,13 +12,29 @@ struct Estudiante{
     int semestre;
 };
 
+struct Curso{
+    int codigo;
+    string nombre;
+    int creditos;
+    int semestre;
+    string carrera;
+};
+
 Estudiante*estudiantes=nullptr;
 int totalEstudiantes=0;
 int capacidadEstudiantes=0;
 
+Curso*cursos=nullptr;
+int totalCursos=0;
+int capacidadCursos=0;
+
 void inicializarEstudiantes(int capacidad);
 void agregarEstudiantes(const Estudiante & e);
 void cargarEstudiantes();
+
+void inicializarCursos(int capacidad);
+void agregarCurso(const Curso& c);
+void cargarCursos();
 
 int main(){
     int opc = 0;
@@ -43,7 +59,7 @@ int main(){
                 cargarEstudiantes();
                 break;
             case 2:
-                cout << "Cargar cursos" << endl;
+                cargarCursos();
                 break;
             case 3:
                 cout << "Cargar notas" << endl;
@@ -124,5 +140,56 @@ void cargarEstudiantes(){
              << estudiantes[i].apellido << " , "
              << estudiantes[i].carrera << " , "
              << estudiantes[i].semestre << endl;
+    }
+}
+
+void inicializarCursos(int capacidad){
+    capacidadCursos=capacidad;
+    totalCursos=0;
+    cursos=new Curso[capacidadCursos];
+}
+
+void agregarCurso(const Curso& c){
+    if (totalCursos<capacidadCursos){
+        cursos[totalCursos++]=c;
+    } else {
+        cout<<"Capacidad maxima alcanzada"<<endl;
+    }
+}
+
+void cargarCursos(){
+    ifstream archivo("cursos.lfp");
+    string linea;
+
+    if (!archivo.is_open()){
+        cout<<"Error al abrir el archivo"<<endl;
+        return;
+    }
+    inicializarCursos(100);
+
+    while (getline(archivo, linea)){
+        Curso c;
+        string token;
+        stringstream ss(linea);
+
+        getline(ss, token, ',');
+        c.codigo=stoi(token);
+        getline(ss, c.nombre,',');
+        getline(ss, token, ',');
+        c.creditos=stoi(token);
+        getline(ss, token, ',');
+        c.semestre=stoi(token);
+
+        agregarCurso(c);
+    }
+    archivo.close();
+    cout<<"Los estudiantes se ingresaron correctamente"<<endl;
+
+    for (int i = 0; i < totalCursos; i++) {
+        cout << cursos[i].codigo << " , "
+             << cursos[i].nombre << " , "
+             << cursos[i].creditos << " , "
+             << cursos[i].semestre << " , "
+             << cursos[i].carrera << endl;
     }
 }
