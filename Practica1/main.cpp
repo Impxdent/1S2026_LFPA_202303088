@@ -52,6 +52,10 @@ void inicializarNotas(int capacidad);
 void agregarNota(const Nota& n);
 void cargarNotas();
 
+int buscarEstudiantePorCarnet(int carnet);
+
+int buscarCursoPorCodigo(int codigo);
+
 int main(){
     int opc = 0;
     do{
@@ -105,6 +109,8 @@ int main(){
     } 
     while (opc!=9);
     delete[] estudiantes;
+    delete[] cursos;
+    delete[] notas;
     return 0;
 }
 
@@ -195,6 +201,8 @@ void cargarCursos(){
         c.creditos=stoi(token);
         getline(ss, token, ',');
         c.semestre=stoi(token);
+        getline(ss, token, ',');
+        c.carrera=stoi(token);
 
         agregarCurso(c);
     }
@@ -244,7 +252,7 @@ void cargarNotas(){
         getline(ss, token, ',');
         n.codigoCurso=stoi(token);
         getline(ss, token, ',');
-        n.nota=stoi(token);
+        n.nota=stof(token);
         getline(ss, n.ciclo, ',');
         getline(ss, token, ',');
         n.año=stoi(token);
@@ -261,4 +269,22 @@ void cargarNotas(){
              << notas[i].ciclo << " , "
              << notas[i].año << endl;
     }
+}
+
+int buscarEstudiantePorCarnet(int carnet){
+    for (int i=0; i<totalEstudiantes; i++){
+        if (estudiantes[i].carnet == carnet){
+            return i;
+        }
+    }
+    return -1;
+}
+
+int buscarCursoPorCodigo(int codigo){
+    for (int i=0; i<totalCursos; i++){
+        if (cursos[i].codigo == codigo){
+            return i;
+        }
+    }
+    return -1;
 }
