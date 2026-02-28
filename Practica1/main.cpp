@@ -1,6 +1,24 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
+
+struct Estudiante{
+    int carnet;
+    string nombre;
+    string apellido;
+    string carrera;
+    int semestre;
+};
+
+Estudiante*estudiantes=nullptr;
+int totalEstudiantes=0;
+int capacidadEstudiantes=0;
+
+void inicializarEstudiantes(int capacidad);
+void agregarEstudiantes(const Estudiante & e);
+void cargarEstudiantes();
 
 int main(){
     int opc = 0;
@@ -22,7 +40,7 @@ int main(){
 
         switch(opc){
             case 1:
-                cout << "Cargar archivo de estudiantes" << endl;
+                cargarEstudiantes();
                 break;
             case 2:
                 cout << "Cargar cursos" << endl;
@@ -40,7 +58,7 @@ int main(){
                 cout << "Top 10 estudiantes" << endl;
                 break;
             case 7:
-                cout << "Cursos con mayor reprobación" << endl;
+                cout << "Cursos con mayor reprobacion" << endl;
                 break;
             case 8:
                 cout << "Analisis por carrera" << endl;
@@ -54,5 +72,57 @@ int main(){
         }
     } 
     while (opc!=9);
+    delete[] estudiantes;
     return 0;
+}
+
+void inicializarEstudiantes(int capacidad){
+    capacidadEstudiantes=capacidad;
+    totalEstudiantes=0;
+    estudiantes=new Estudiante[capacidadEstudiantes];
+}
+
+void agregarEstudiantes(const Estudiante& e){
+    if (totalEstudiantes<capacidadEstudiantes){
+        estudiantes[totalEstudiantes++]=e;
+    } else {
+        cout<<"Capacidad maxima alcanzada"<<endl;
+    }
+}
+
+void cargarEstudiantes(){
+    ifstream archivo("estudiantes.lfp");
+    string linea;
+
+    if (!archivo.is_open()){
+        cout<<"Error al abrir el archivo"<<endl;
+        return;
+    }
+    inicializarEstudiantes(100);
+
+    while (getline(archivo, linea)){
+        Estudiante e;
+        string token;
+        stringstream ss(linea);
+
+        getline(ss, token, ',');
+        e.carnet=stoi(token);
+        getline(ss, e.nombre,',');
+        getline(ss, e.apellido,',');
+        getline(ss, e.carrera,',');
+        getline(ss, token, ',');
+        e.semestre=stoi(token);
+
+        agregarEstudiantes(e);
+    }
+    archivo.close();
+    cout<<"Los estudiantes se ingresaron correctamente"<<endl;
+
+    for (int i = 0; i < totalEstudiantes; i++) {
+        cout << estudiantes[i].carnet << " , "
+             << estudiantes[i].nombre << " , "
+             << estudiantes[i].apellido << " , "
+             << estudiantes[i].carrera << " , "
+             << estudiantes[i].semestre << endl;
+    }
 }
