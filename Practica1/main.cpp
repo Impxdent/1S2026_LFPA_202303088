@@ -20,6 +20,14 @@ struct Curso{
     string carrera;
 };
 
+struct Nota{
+    int carnet;
+    int codigoCurso;
+    float nota;
+    string ciclo;
+    int año;
+};
+
 Estudiante*estudiantes=nullptr;
 int totalEstudiantes=0;
 int capacidadEstudiantes=0;
@@ -28,6 +36,10 @@ Curso*cursos=nullptr;
 int totalCursos=0;
 int capacidadCursos=0;
 
+Nota*notas=nullptr;
+int totalNotas=0;
+int capacidadNotas=0;
+
 void inicializarEstudiantes(int capacidad);
 void agregarEstudiantes(const Estudiante & e);
 void cargarEstudiantes();
@@ -35,6 +47,10 @@ void cargarEstudiantes();
 void inicializarCursos(int capacidad);
 void agregarCurso(const Curso& c);
 void cargarCursos();
+
+void inicializarNotas(int capacidad);
+void agregarNota(const Nota& n);
+void cargarNotas();
 
 int main(){
     int opc = 0;
@@ -62,7 +78,7 @@ int main(){
                 cargarCursos();
                 break;
             case 3:
-                cout << "Cargar notas" << endl;
+                cargarNotas();
                 break;
             case 4:
                 cout << "Reporte por curso" << endl;
@@ -132,7 +148,7 @@ void cargarEstudiantes(){
         agregarEstudiantes(e);
     }
     archivo.close();
-    cout<<"Los estudiantes se ingresaron correctamente"<<endl;
+    cout<<"Los estudiantes se cargaron correctamente"<<endl;
 
     for (int i = 0; i < totalEstudiantes; i++) {
         cout << estudiantes[i].carnet << " , "
@@ -183,7 +199,7 @@ void cargarCursos(){
         agregarCurso(c);
     }
     archivo.close();
-    cout<<"Los estudiantes se ingresaron correctamente"<<endl;
+    cout<<"Los cursos se cargaron correctamente"<<endl;
 
     for (int i = 0; i < totalCursos; i++) {
         cout << cursos[i].codigo << " , "
@@ -191,5 +207,58 @@ void cargarCursos(){
              << cursos[i].creditos << " , "
              << cursos[i].semestre << " , "
              << cursos[i].carrera << endl;
+    }
+}
+
+void inicializarNotas(int capacidad){
+    capacidadNotas=capacidad;
+    totalNotas=0;
+    notas=new Nota[capacidadNotas];
+}
+
+void agregarNota(const Nota& n){
+    if (totalNotas<capacidadNotas){
+        notas[totalNotas++]=n;
+    } else {
+        cout<<"Capacidad maxima alcanzada"<<endl;
+    }
+}
+
+void cargarNotas(){
+    ifstream archivo("notas.lfp");
+    string linea;
+
+    if (!archivo.is_open()){
+        cout<<"Error al abrir el archivo"<<endl;
+        return;
+    }
+    inicializarNotas(100);
+
+    while (getline(archivo, linea)){
+        Nota n;
+        string token;
+        stringstream ss(linea);
+
+        getline(ss, token, ',');
+        n.carnet=stoi(token);
+        getline(ss, token, ',');
+        n.codigoCurso=stoi(token);
+        getline(ss, token, ',');
+        n.nota=stoi(token);
+        getline(ss, n.ciclo, ',');
+        getline(ss, token, ',');
+        n.año=stoi(token);
+
+        agregarNota(n);
+    }
+    archivo.close();
+    cout<<"Las notas se cargaron correctamente"<<endl;
+
+    for (int i = 0; i < totalNotas; i++) {
+        cout << notas[i].carnet << " , "
+             << notas[i].codigoCurso << " , "
+             << notas[i].nota << " , "
+             << notas[i].ciclo << " , "
+             << notas[i].año << endl;
     }
 }
