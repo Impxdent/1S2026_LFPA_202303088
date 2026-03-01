@@ -115,6 +115,8 @@ Reportes disponibles:
 - Cursos con mayor reprobación
 - Análisis por carrera
 
+---
+
 ## 8. Observaciónes técnicas
 
 - No se utilizan contenedores STL avanzados
