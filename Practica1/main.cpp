@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 
 using namespace std;
 
@@ -79,11 +80,16 @@ void reporteCursosMayorReprobacion();
 
 void reporteAnalisisPorCarrera();
 
+time_t actual = time(0);
+char* fechaHora = ctime(&actual);
+
 //menú principal
 
 int main(){
     int opc = 0;
     do{
+        cout << "Bienvenido: Andre E" << endl;
+        cout << "La hora actual es:"<<fechaHora;
         cout << "=========================================" << endl;
         cout << "     SISTEMA DE ANALISIS ACADEMICO" << endl;
         cout << "=========================================" << endl;
