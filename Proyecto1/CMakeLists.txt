@@ -10,7 +10,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-# Buscar las librerías de Qt (Ajusta a Qt5 si usas esa versión)
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 # Archivos fuente del proyecto (iremos agregando los demás paso a paso)
@@ -18,7 +17,7 @@ add_executable(MedLexer
     src/main.cpp
     src/Token.cpp src/Token.h
     src/ErrorManager.cpp src/ErrorManager.h
-    # src/LexicalAnalyzer.cpp src/LexicalAnalyzer.h
+    src/LexicalAnalyzer.cpp src/LexicalAnalyzer.h
     # src/ReportGenerator.cpp src/ReportGenerator.h
     src/MainWindow.cpp src/MainWindow.h
 )
