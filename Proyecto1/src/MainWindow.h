@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QPlainTextEdit>
 #include <QPushButton>
+#include <QTableWidget>
+#include "Token.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -20,6 +22,10 @@ private:
     QPlainTextEdit *editorCodigo;
     QPushButton *btnCargarArchivo;
     QPushButton *btnAnalizar;
+    QPushButton *btnSalir;
+    QTableWidget *tablaTokens;
+
+    QString obtenerNombreToken(TokenType tipo);
 };
 
 #endif 
