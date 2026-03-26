@@ -20,7 +20,7 @@ add_executable(MedLexer
     src/ErrorManager.cpp src/ErrorManager.h
     # src/LexicalAnalyzer.cpp src/LexicalAnalyzer.h
     # src/ReportGenerator.cpp src/ReportGenerator.h
-    # src/MainWindow.cpp src/MainWindow.h
+    src/MainWindow.cpp src/MainWindow.h
 )
 
 target_link_libraries(MedLexer PRIVATE Qt6::Widgets)
