@@ -19,34 +19,41 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout *layoutPrincipal = new QVBoxLayout(widgetCentral);
 
     QHBoxLayout *layoutBotones = new QHBoxLayout();
-    
     btnCargarArchivo = new QPushButton("Cargar Archivo .med", this);
     btnAnalizar = new QPushButton("Analizar Código", this);
-    btnSalir = new QPushButton("Salir del Programa", this); 
+    btnSalir = new QPushButton("Salir", this);
 
     layoutBotones->addWidget(btnCargarArchivo);
     layoutBotones->addWidget(btnAnalizar);
     layoutBotones->addWidget(btnSalir);
-
     layoutPrincipal->addLayout(layoutBotones);
+
     QHBoxLayout *layoutPantallaDividida = new QHBoxLayout();
 
     editorCodigo = new QPlainTextEdit(this);
     editorCodigo->setPlaceholderText("Aquí aparecerá el código...");
     
+    pestanasResultados = new QTabWidget(this);
+
     tablaTokens = new QTableWidget(0, 4, this);
-    tablaTokens->setHorizontalHeaderLabels({"Token", "Lexema", "Fila", "Col."});
+    tablaTokens->setHorizontalHeaderLabels({"Token", "Lexema", "Fila", "Columna"});
     tablaTokens->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    tablaErrores = new QTableWidget(0, 4, this);
+    tablaErrores->setHorizontalHeaderLabels({"Carácter Desconocido", "Fila", "Columna", "Descripción"});
+    tablaErrores->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    pestanasResultados->addTab(tablaTokens, "Tokens Reconocidos");
+    pestanasResultados->addTab(tablaErrores, "Errores Léxicos");
+
     layoutPantallaDividida->addWidget(editorCodigo);
-    layoutPantallaDividida->addWidget(tablaTokens);
+    layoutPantallaDividida->addWidget(pestanasResultados); 
 
     layoutPrincipal->addLayout(layoutPantallaDividida);
     setCentralWidget(widgetCentral);
 
     connect(btnCargarArchivo, &QPushButton::clicked, this, &MainWindow::cargarArchivo);
     connect(btnAnalizar, &QPushButton::clicked, this, &MainWindow::analizarTexto);
-    
     connect(btnSalir, &QPushButton::clicked, this, &MainWindow::close);
 }
 
@@ -78,16 +85,30 @@ void MainWindow::analizarTexto() {
     QList<Token> tokens = lexer.analizar(texto);
 
     tablaTokens->setRowCount(0);
+    tablaErrores->setRowCount(0);
+
+    int filaTokens = 0;
+    int filaErrores = 0;
 
     for (int i = 0; i < tokens.size(); ++i) {
-        tablaTokens->insertRow(i);
-        tablaTokens->setItem(i, 0, new QTableWidgetItem(obtenerNombreToken(tokens[i].tipo)));
-        tablaTokens->setItem(i, 1, new QTableWidgetItem(tokens[i].lexema));
-        tablaTokens->setItem(i, 2, new QTableWidgetItem(QString::number(tokens[i].fila)));
-        tablaTokens->setItem(i, 3, new QTableWidgetItem(QString::number(tokens[i].columna)));
+        if (tokens[i].tipo == ErrorLexico) {
+            tablaErrores->insertRow(filaErrores);
+            tablaErrores->setItem(filaErrores, 0, new QTableWidgetItem(tokens[i].lexema));
+            tablaErrores->setItem(filaErrores, 1, new QTableWidgetItem(QString::number(tokens[i].fila)));
+            tablaErrores->setItem(filaErrores, 2, new QTableWidgetItem(QString::number(tokens[i].columna)));
+            tablaErrores->setItem(filaErrores, 3, new QTableWidgetItem("Símbolo no pertenece al lenguaje"));
+            filaErrores++;
+        } else {
+            tablaTokens->insertRow(filaTokens);
+            tablaTokens->setItem(filaTokens, 0, new QTableWidgetItem(obtenerNombreToken(tokens[i].tipo)));
+            tablaTokens->setItem(filaTokens, 1, new QTableWidgetItem(tokens[i].lexema));
+            tablaTokens->setItem(filaTokens, 2, new QTableWidgetItem(QString::number(tokens[i].fila)));
+            tablaTokens->setItem(filaTokens, 3, new QTableWidgetItem(QString::number(tokens[i].columna)));
+            filaTokens++;
+        }
     }
 
-    QMessageBox::information(this, "Éxito", "Análisis completado.");
+    QMessageBox::information(this, "Éxito", QString("Análisis completado.\nTokens válidos: %1\nErrores encontrados: %2").arg(filaTokens).arg(filaErrores));
 }
 
 QString MainWindow::obtenerNombreToken(TokenType tipo) {
@@ -104,7 +125,6 @@ QString MainWindow::obtenerNombreToken(TokenType tipo) {
         case CorcheteCierra: return "Corchete ]";
         case DosPuntos: return "Dos Puntos :";
         case Coma: return "Coma ,";
-        case ErrorLexico: return "¡ERROR LÉXICO!";
         default: return "Desconocido";
     }
 }
