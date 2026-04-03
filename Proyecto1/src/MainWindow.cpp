@@ -9,8 +9,7 @@
 #include <QHeaderView>
 #include "LexicalAnalyzer.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     
     setWindowTitle("MedLexer - Analizador Léxico");
     resize(1000, 600); 
@@ -21,10 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
     QHBoxLayout *layoutBotones = new QHBoxLayout();
     btnCargarArchivo = new QPushButton("Cargar Archivo .med", this);
     btnAnalizar = new QPushButton("Analizar Código", this);
+    btnAcercaDe = new QPushButton("Acerca de", this);
     btnSalir = new QPushButton("Salir", this);
 
     layoutBotones->addWidget(btnCargarArchivo);
     layoutBotones->addWidget(btnAnalizar);
+    layoutBotones->addWidget(btnAcercaDe);
     layoutBotones->addWidget(btnSalir);
     layoutPrincipal->addLayout(layoutBotones);
 
@@ -54,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(btnCargarArchivo, &QPushButton::clicked, this, &MainWindow::cargarArchivo);
     connect(btnAnalizar, &QPushButton::clicked, this, &MainWindow::analizarTexto);
+    connect(btnAcercaDe, &QPushButton::clicked, this, &MainWindow::mostrarAcercaDe);
     connect(btnSalir, &QPushButton::clicked, this, &MainWindow::close);
 }
 
@@ -109,6 +111,18 @@ void MainWindow::analizarTexto() {
     }
 
     QMessageBox::information(this, "Éxito", QString("Análisis completado.\nTokens válidos: %1\nErrores encontrados: %2").arg(filaTokens).arg(filaErrores));
+}
+
+void MainWindow::mostrarAcercaDe(){
+    QString informacion = 
+        "<h2>Analizador Léxico - MedLexer</h2>"
+        "<p><b>Curso:</b> Lenguajes Formales y de Programación sección A</p>"
+        "<p><b>Estudiante:</b> Eldan André Escobar Asturias</p>"
+        "<p><b>Carnet:</b> 202303088</p>"
+        "<hr>" 
+        "<p>Universidad de San Carlos de Guatemala<br>Primer Semestre 2026</p>";
+
+    QMessageBox::about(this, "Acerca del desarrollador", informacion);
 }
 
 QString MainWindow::obtenerNombreToken(TokenType tipo) {

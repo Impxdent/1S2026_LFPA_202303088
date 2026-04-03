@@ -18,11 +18,13 @@ public:
 private slots: 
     void cargarArchivo();
     void analizarTexto();
+    void mostrarAcercaDe();
 
 private:
     QPlainTextEdit *editorCodigo;
     QPushButton *btnCargarArchivo;
     QPushButton *btnAnalizar;
+    QPushButton *btnAcercaDe;
     QPushButton *btnSalir;
     QTabWidget *pestanasResultados;
     QTableWidget *tablaTokens;
