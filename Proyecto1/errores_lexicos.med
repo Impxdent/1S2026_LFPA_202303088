@@ -1,0 +1,8 @@
+HOSPITAL {
+    medico: "Dr. House",
+    $codigo: 999,
+    paciente: @Maria,
+    tipo_sangre: B+,
+    observacion: "esta cadena no tiene fin
+    fecha: 2026-12-01?
+}

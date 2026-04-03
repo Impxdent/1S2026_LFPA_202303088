@@ -1,0 +1,9 @@
+HOSPITAL {
+    paciente: "Juan Perez",
+    edad: 45,
+    tipo_sangre: O+,
+    fecha: 2026-04-02,
+    hora: 14:30,
+    medico: "Dr. Hernandez",
+    especialidad: GENERAL
+}

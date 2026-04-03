@@ -1,0 +1,15 @@
+HOSPITAL {
+    medico: "Dra. Ana Lopez",
+    especialidad: CARDIOLOGIA,
+    codigo: COD_1020_A,
+    paciente: [
+        { 
+            edad: 30, 
+            tipo_sangre: A+ 
+        },
+        { 
+            edad: 55, 
+            tipo_sangre: AB- 
+        }
+    ]
+}
