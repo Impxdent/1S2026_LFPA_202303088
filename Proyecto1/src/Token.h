@@ -3,10 +3,10 @@
 
 #include <QString>
 
-// Lista de todo lo que nuestro lenguaje entiende
+//lista de todo lo que nuestro lenguaje entiende
 enum TokenType {
-    PalabraReservada, // HOSPITAL, paciente, medico, etc.
-    Identificador,    // CARDIOLOGIA, O+, etc.
+    PalabraReservada, // HOSPITAL, paciente, medico, etc
+    Identificador,    // CARDIOLOGIA, O+, etc
     Numero,           // 45
     Cadena,           // "O+"
     Fecha,            // 2026-03-25
@@ -28,4 +28,4 @@ struct Token {
     int columna;
 };
 
-#endif // TOKEN_H
+#endif

@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QHeaderView>
 #include "LexicalAnalyzer.h"
+#include "ReportGenerator.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     
@@ -18,13 +19,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QVBoxLayout *layoutPrincipal = new QVBoxLayout(widgetCentral);
 
     QHBoxLayout *layoutBotones = new QHBoxLayout();
-    btnCargarArchivo = new QPushButton("Cargar Archivo .med", this);
-    btnAnalizar = new QPushButton("Analizar Código", this);
+    btnCargarArchivo = new QPushButton("Cargar archivo .med", this);
+    btnAnalizar = new QPushButton("Analizar código", this);
+    btnReporte = new QPushButton("Generar reporte", this);
     btnAcercaDe = new QPushButton("Acerca de", this);
     btnSalir = new QPushButton("Salir", this);
 
     layoutBotones->addWidget(btnCargarArchivo);
     layoutBotones->addWidget(btnAnalizar);
+    layoutBotones->addWidget(btnReporte);
     layoutBotones->addWidget(btnAcercaDe);
     layoutBotones->addWidget(btnSalir);
     layoutPrincipal->addLayout(layoutBotones);
@@ -32,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QHBoxLayout *layoutPantallaDividida = new QHBoxLayout();
 
     editorCodigo = new QPlainTextEdit(this);
-    editorCodigo->setPlaceholderText("Aquí aparecerá el código...");
+    editorCodigo->setPlaceholderText("Ingrese el código");
     
     pestanasResultados = new QTabWidget(this);
 
@@ -55,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
     connect(btnCargarArchivo, &QPushButton::clicked, this, &MainWindow::cargarArchivo);
     connect(btnAnalizar, &QPushButton::clicked, this, &MainWindow::analizarTexto);
+    connect(btnReporte, &QPushButton::clicked, this, &MainWindow::generarReporte);
     connect(btnAcercaDe, &QPushButton::clicked, this, &MainWindow::mostrarAcercaDe);
     connect(btnSalir, &QPushButton::clicked, this, &MainWindow::close);
 }
@@ -123,6 +127,24 @@ void MainWindow::mostrarAcercaDe(){
         "<p>Universidad de San Carlos de Guatemala<br>Primer Semestre 2026</p>";
 
     QMessageBox::about(this, "Acerca del desarrollador", informacion);
+}
+
+void MainWindow::generarReporte() {
+    if (tablaTokens->rowCount() == 0 && tablaErrores->rowCount() == 0) {
+        QMessageBox::warning(this, "Aviso", "No hay datos para generar el reporte. Analiza un archivo primero.");
+        return;
+    }
+
+    QString rutaArchivo = QFileDialog::getSaveFileName(this, "Guardar Reporte", "Reporte_MedLexer.html", "Archivos HTML (*.html)");
+    if (rutaArchivo.isEmpty()) return;
+
+    bool exito = ReportGenerator::generarReporteHTML(tablaTokens, tablaErrores, rutaArchivo);
+
+    if (exito) {
+        QMessageBox::information(this, "Éxito", "¡Reporte HTML generado correctamente!\nPuedes abrirlo en tu navegador.");
+    } else {
+        QMessageBox::warning(this, "Error", "No se pudo guardar el archivo.");
+    }
 }
 
 QString MainWindow::obtenerNombreToken(TokenType tipo) {
