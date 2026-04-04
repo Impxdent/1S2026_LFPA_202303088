@@ -17,6 +17,7 @@ enum TokenType {
     CorcheteCierra,   // ]
     DosPuntos,        // :
     Coma,             // ,
+    PuntoYComa,       // ;
     ErrorLexico       // $, %, # o cadenas sin cerrar
 };
 

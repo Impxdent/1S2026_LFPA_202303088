@@ -29,6 +29,7 @@ QList<Token> LexicalAnalyzer::analizar(const QString& entrada) {
         if (c == ']') { listaTokens.append({CorcheteCierra, "]", fila, columna}); i++; columna++; continue; }
         if (c == ':') { listaTokens.append({DosPuntos, ":", fila, columna}); i++; columna++; continue; }
         if (c == ',') { listaTokens.append({Coma, ",", fila, columna}); i++; columna++; continue; }
+        if (c == ';') { listaTokens.append({PuntoYComa, ";", fila, columna}); i++; columna++; continue; }
 
         if (c == '"') {
             QString lexema = "\"";

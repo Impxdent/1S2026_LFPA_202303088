@@ -7,6 +7,7 @@
 #include <QTableWidget>
 #include <QTabWidget>
 #include "Token.h"
+#include "Estructuras.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -31,6 +32,7 @@ private:
     QTabWidget *pestanasResultados;
     QTableWidget *tablaTokens;
     QTableWidget *tablaErrores;
+    QList<Token> tokensActuales;
 
     QString obtenerNombreToken(TokenType tipo);
 };

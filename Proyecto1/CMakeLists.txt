@@ -17,6 +17,7 @@ add_executable(MedLexer
     src/LexicalAnalyzer.cpp src/LexicalAnalyzer.h
     src/ReportGenerator.cpp src/ReportGenerator.h
     src/MainWindow.cpp src/MainWindow.h
+    src/DataExtractor.cpp src/DataExtractor.h
 )
 
 target_link_libraries(MedLexer PRIVATE Qt6::Widgets)

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>Reporte Léxico</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f7f6; }
+h1, h2 { color: #2c3e50; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background-color: white; }
+th, td { border: 1px solid #dddddd; padding: 12px; text-align: left; }
+th { background-color: #2980b9; color: white; }
+.error-th { background-color: #e74c3c; }
+</style>
+</head>
+<body>
+<h1>Reporte de Análisis Léxico</h1>
+<h2>Tokens Válidos Reconocidos</h2>
+<table>
+<tr><th>Token</th><th>Lexema</th><th>Fila</th><th>Columna</th></tr>
+<tr><td>Palabra Reservada</td><td>HOSPITAL</td><td>1</td><td>1</td></tr>
+<tr><td>Llave {</td><td>{</td><td>1</td><td>10</td></tr>
+<tr><td>Identificador</td><td>PACIENTES</td><td>2</td><td>5</td></tr>
+<tr><td>Llave {</td><td>{</td><td>2</td><td>15</td></tr>
+<tr><td>Palabra Reservada</td><td>paciente</td><td>3</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>3</td><td>17</td></tr>
+<tr><td>Cadena</td><td>&quot;María García&quot;</td><td>3</td><td>19</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>3</td><td>35</td></tr>
+<tr><td>Palabra Reservada</td><td>edad</td><td>3</td><td>36</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>3</td><td>40</td></tr>
+<tr><td>Número</td><td>45</td><td>3</td><td>42</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>3</td><td>44</td></tr>
+<tr><td>Palabra Reservada</td><td>tipo_sangre</td><td>3</td><td>46</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>3</td><td>57</td></tr>
+<tr><td>Cadena</td><td>&quot;A+&quot;</td><td>3</td><td>59</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>3</td><td>63</td></tr>
+<tr><td>Identificador</td><td>habitacion</td><td>3</td><td>65</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>3</td><td>75</td></tr>
+<tr><td>Número</td><td>302</td><td>3</td><td>77</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>3</td><td>80</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>3</td><td>81</td></tr>
+<tr><td>Palabra Reservada</td><td>paciente</td><td>4</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>4</td><td>17</td></tr>
+<tr><td>Cadena</td><td>&quot;Carlos Mendoza&quot;</td><td>4</td><td>19</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>4</td><td>36</td></tr>
+<tr><td>Palabra Reservada</td><td>edad</td><td>4</td><td>37</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>4</td><td>41</td></tr>
+<tr><td>Número</td><td>62</td><td>4</td><td>43</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>4</td><td>45</td></tr>
+<tr><td>Palabra Reservada</td><td>tipo_sangre</td><td>4</td><td>47</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>4</td><td>58</td></tr>
+<tr><td>Cadena</td><td>&quot;O-&quot;</td><td>4</td><td>60</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>4</td><td>64</td></tr>
+<tr><td>Identificador</td><td>habitacion</td><td>4</td><td>66</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>4</td><td>76</td></tr>
+<tr><td>Número</td><td>410</td><td>4</td><td>78</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>4</td><td>81</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>4</td><td>82</td></tr>
+<tr><td>Llave }</td><td>}</td><td>5</td><td>5</td></tr>
+<tr><td>Punto y coma</td><td>;</td><td>5</td><td>6</td></tr>
+<tr><td>Identificador</td><td>MEDICOS</td><td>6</td><td>5</td></tr>
+<tr><td>Llave {</td><td>{</td><td>6</td><td>13</td></tr>
+<tr><td>Palabra Reservada</td><td>medico</td><td>7</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>7</td><td>15</td></tr>
+<tr><td>Cadena</td><td>&quot;Dr. Roberto Juárez&quot;</td><td>7</td><td>17</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>7</td><td>38</td></tr>
+<tr><td>Palabra Reservada</td><td>especialidad</td><td>7</td><td>39</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>7</td><td>51</td></tr>
+<tr><td>Identificador</td><td>CARDIOLOGIA</td><td>7</td><td>53</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>7</td><td>64</td></tr>
+<tr><td>Palabra Reservada</td><td>codigo</td><td>7</td><td>66</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>7</td><td>72</td></tr>
+<tr><td>Cadena</td><td>&quot;MED-001&quot;</td><td>7</td><td>74</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>7</td><td>83</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>7</td><td>84</td></tr>
+<tr><td>Palabra Reservada</td><td>medico</td><td>8</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>8</td><td>15</td></tr>
+<tr><td>Cadena</td><td>&quot;Dra. Ana Solís&quot;</td><td>8</td><td>17</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>8</td><td>38</td></tr>
+<tr><td>Palabra Reservada</td><td>especialidad</td><td>8</td><td>39</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>8</td><td>51</td></tr>
+<tr><td>Identificador</td><td>NEUROLOGIA</td><td>8</td><td>53</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>8</td><td>63</td></tr>
+<tr><td>Palabra Reservada</td><td>codigo</td><td>8</td><td>66</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>8</td><td>72</td></tr>
+<tr><td>Cadena</td><td>&quot;MED-002&quot;</td><td>8</td><td>74</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>8</td><td>83</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>8</td><td>84</td></tr>
+<tr><td>Llave }</td><td>}</td><td>9</td><td>5</td></tr>
+<tr><td>Punto y coma</td><td>;</td><td>9</td><td>6</td></tr>
+<tr><td>Identificador</td><td>CITAS</td><td>10</td><td>5</td></tr>
+<tr><td>Llave {</td><td>{</td><td>10</td><td>11</td></tr>
+<tr><td>Identificador</td><td>cita</td><td>11</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>11</td><td>13</td></tr>
+<tr><td>Cadena</td><td>&quot;María García&quot;</td><td>11</td><td>15</td></tr>
+<tr><td>Identificador</td><td>con</td><td>11</td><td>31</td></tr>
+<tr><td>Cadena</td><td>&quot;Dr. Roberto Juárez&quot;</td><td>11</td><td>35</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>11</td><td>56</td></tr>
+<tr><td>Palabra Reservada</td><td>fecha</td><td>11</td><td>57</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>11</td><td>62</td></tr>
+<tr><td>Fecha</td><td>2025-04-10</td><td>11</td><td>64</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>11</td><td>74</td></tr>
+<tr><td>Palabra Reservada</td><td>hora</td><td>11</td><td>76</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>11</td><td>80</td></tr>
+<tr><td>Hora</td><td>09:00</td><td>11</td><td>82</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>11</td><td>87</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>11</td><td>88</td></tr>
+<tr><td>Identificador</td><td>cita</td><td>12</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>12</td><td>13</td></tr>
+<tr><td>Cadena</td><td>&quot;Carlos Mendoza&quot;</td><td>12</td><td>15</td></tr>
+<tr><td>Identificador</td><td>con</td><td>12</td><td>32</td></tr>
+<tr><td>Cadena</td><td>&quot;Dra. Ana Solís&quot;</td><td>12</td><td>36</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>12</td><td>56</td></tr>
+<tr><td>Palabra Reservada</td><td>fecha</td><td>12</td><td>57</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>12</td><td>62</td></tr>
+<tr><td>Fecha</td><td>2025-04-10</td><td>12</td><td>64</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>12</td><td>74</td></tr>
+<tr><td>Palabra Reservada</td><td>hora</td><td>12</td><td>76</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>12</td><td>80</td></tr>
+<tr><td>Hora</td><td>11:30</td><td>12</td><td>82</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>12</td><td>87</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>12</td><td>88</td></tr>
+<tr><td>Llave }</td><td>}</td><td>13</td><td>5</td></tr>
+<tr><td>Punto y coma</td><td>;</td><td>13</td><td>6</td></tr>
+<tr><td>Identificador</td><td>DIAGNOSTICOS</td><td>14</td><td>5</td></tr>
+<tr><td>Llave {</td><td>{</td><td>14</td><td>18</td></tr>
+<tr><td>Identificador</td><td>diagnostico</td><td>15</td><td>9</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>15</td><td>20</td></tr>
+<tr><td>Cadena</td><td>&quot;María García&quot;</td><td>15</td><td>22</td></tr>
+<tr><td>Corchete [</td><td>[</td><td>15</td><td>37</td></tr>
+<tr><td>Identificador</td><td>condicion</td><td>15</td><td>38</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>15</td><td>47</td></tr>
+<tr><td>Cadena</td><td>&quot;Hipertensión Arterial&quot;</td><td>15</td><td>49</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>15</td><td>72</td></tr>
+<tr><td>Identificador</td><td>medicamento</td><td>15</td><td>74</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>15</td><td>85</td></tr>
+<tr><td>Cadena</td><td>&quot;Losartán 50mg&quot;</td><td>15</td><td>87</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>15</td><td>102</td></tr>
+<tr><td>Identificador</td><td>dosis</td><td>15</td><td>104</td></tr>
+<tr><td>Dos Puntos :</td><td>:</td><td>15</td><td>109</td></tr>
+<tr><td>Identificador</td><td>DIARIA</td><td>15</td><td>111</td></tr>
+<tr><td>Corchete ]</td><td>]</td><td>15</td><td>117</td></tr>
+<tr><td>Coma ,</td><td>,</td><td>15</td><td>118</td></tr>
+<tr><td>Llave }</td><td>}</td><td>16</td><td>5</td></tr>
+<tr><td>Punto y coma</td><td>;</td><td>16</td><td>6</td></tr>
+<tr><td>Llave }</td><td>}</td><td>17</td><td>1</td></tr>
+<tr><td>Punto y coma</td><td>;</td><td>17</td><td>2</td></tr>
+</table>
+<h2>Errores Léxicos Encontrados</h2>
+<table>
+<tr><th class='error-th'>Carácter Desconocido</th><th class='error-th'>Fila</th><th class='error-th'>Columna</th><th class='error-th'>Descripción</th></tr>
+</table>
+</body>
+</html>

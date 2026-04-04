@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include <QProcess>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QWidget>
@@ -9,6 +10,8 @@
 #include <QHeaderView>
 #include "LexicalAnalyzer.h"
 #include "ReportGenerator.h"
+#include "DataExtractor.h"
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     
@@ -88,7 +91,8 @@ void MainWindow::analizarTexto() {
     }
 
     LexicalAnalyzer lexer;
-    QList<Token> tokens = lexer.analizar(texto);
+    tokensActuales = lexer.analizar(texto);
+    QList<Token> tokens = tokensActuales;
 
     tablaTokens->setRowCount(0);
     tablaErrores->setRowCount(0);
@@ -130,20 +134,52 @@ void MainWindow::mostrarAcercaDe(){
 }
 
 void MainWindow::generarReporte() {
-    if (tablaTokens->rowCount() == 0 && tablaErrores->rowCount() == 0) {
-        QMessageBox::warning(this, "Aviso", "No hay datos para generar el reporte. Analiza un archivo primero.");
+    if (tokensActuales.isEmpty()) {
+        QMessageBox::warning(this, "Aviso", "Error, debe analizar un archivo");
         return;
     }
+    //validar ruta
+    QString directorio = QFileDialog::getExistingDirectory(this, "Selecciona la carpeta para guardar los reportes");
+    if (directorio.isEmpty()) return;
 
-    QString rutaArchivo = QFileDialog::getSaveFileName(this, "Guardar Reporte", "Reporte_MedLexer.html", "Archivos HTML (*.html)");
-    if (rutaArchivo.isEmpty()) return;
+    //generar tabla de errores
+    QString rutaLexico = directorio + "/TablaErroresLexicos.html";
+    bool exitoLexico = ReportGenerator::generarReporteHTML(tablaTokens, tablaErrores, rutaLexico);
 
-    bool exito = ReportGenerator::generarReporteHTML(tablaTokens, tablaErrores, rutaArchivo);
+    //generar cuatro reportes
+    Hospital hospital = DataExtractor::extraerDatos(tokensActuales);
+    bool exito = ReportGenerator::generarReportesSemanticos(hospital, directorio);
+
+    //generar archivo dot
+    bool exitoGraphviz = ReportGenerator::generarReporteGraphviz(hospital, directorio);
+
+    //generar imagen
+    bool exitoImagen = false;
+    if (exitoGraphviz) {
+        QString rutaDot = directorio + "/hospital.dot";
+        QString rutaPng = directorio + "/hospital.png";
+
+        QStringList argumentos;
+        argumentos << "-Tpng" << rutaDot << "-o" << rutaPng;
+
+        QProcess procesoGraphviz;
+        
+        procesoGraphviz.start("dot", argumentos);
+        if (procesoGraphviz.waitForFinished(5000)) {
+            if (procesoGraphviz.exitCode() == 0) {
+                exitoImagen = true;
+            } else {
+                qDebug() << "Error en dot: " << procesoGraphviz.readAllStandardError();
+            }
+        } else {
+             qDebug() << "Tiempo";
+        }
+    }
 
     if (exito) {
-        QMessageBox::information(this, "Éxito", "¡Reporte HTML generado correctamente!\nPuedes abrirlo en tu navegador.");
+        QMessageBox::information(this, "Éxito", "Se generaron todos los archivos");
     } else {
-        QMessageBox::warning(this, "Error", "No se pudo guardar el archivo.");
+        QMessageBox::warning(this, "Error", "Error, hubo un problema al guardar los archivos");
     }
 }
 
@@ -161,6 +197,8 @@ QString MainWindow::obtenerNombreToken(TokenType tipo) {
         case CorcheteCierra: return "Corchete ]";
         case DosPuntos: return "Dos Puntos :";
         case Coma: return "Coma ,";
+        case PuntoYComa: return "Punto y coma";
+        case ErrorLexico: return "Error léxico";
         default: return "Desconocido";
     }
 }
