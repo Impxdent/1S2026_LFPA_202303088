@@ -1,0 +1,5 @@
+C:/1S2026_LFPA_202303088/Proyecto2/build/CMakeFiles/TaskScriptProject.dir
+C:/1S2026_LFPA_202303088/Proyecto2/build/CMakeFiles/edit_cache.dir
+C:/1S2026_LFPA_202303088/Proyecto2/build/CMakeFiles/rebuild_cache.dir
+C:/1S2026_LFPA_202303088/Proyecto2/build/CMakeFiles/TaskScriptProject_autogen_timestamp_deps.dir
+C:/1S2026_LFPA_202303088/Proyecto2/build/CMakeFiles/TaskScriptProject_autogen.dir

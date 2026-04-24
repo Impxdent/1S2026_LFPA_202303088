@@ -1,0 +1,1 @@
+-IC:/1S2026_LFPA_202303088/Proyecto2/build/TaskScriptProject_autogen/include -IC:/1S2026_LFPA_202303088/Proyecto2/src -isystem C:/msys64/mingw64/include/qt6/QtWidgets -isystem C:/msys64/mingw64/include/qt6 -isystem C:/msys64/mingw64/include/qt6/QtCore -isystem "C:/msys64/mingw64/share/qt6/mkspecs/win32-g++" -isystem C:/msys64/mingw64/include/qt6/QtGui
