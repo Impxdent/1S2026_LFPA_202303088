@@ -16,14 +16,13 @@ private:
     char advance();
     void skipWhitespace();
     
-    // Métodos para estados del AFD
     Token readString();
     Token readNumberOrDate();
     Token readIdentifier();
 
 public:
     LexicalAnalyzer(const std::string& input);
-    Token nextToken(); // El método principal solicitado
+    Token nextToken(); 
 };
 
 #endif

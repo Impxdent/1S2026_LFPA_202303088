@@ -11,7 +11,6 @@ private:
 
     void match(TokenType expected);
     
-    // Funciones de la gramática
     void programa();
     void columnas();
     void columna();
