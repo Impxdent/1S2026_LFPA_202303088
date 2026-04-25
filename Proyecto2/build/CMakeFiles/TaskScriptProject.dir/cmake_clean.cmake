@@ -10,6 +10,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/TaskScriptProject.dir/src/LexicalAnalyzer.cpp.obj.d"
   "CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.obj"
   "CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.obj.d"
+  "CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.obj"
+  "CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.obj.d"
   "CMakeFiles/TaskScriptProject.dir/src/SyntaxAnalyzer.cpp.obj"
   "CMakeFiles/TaskScriptProject.dir/src/SyntaxAnalyzer.cpp.obj.d"
   "CMakeFiles/TaskScriptProject.dir/src/Token.cpp.obj"

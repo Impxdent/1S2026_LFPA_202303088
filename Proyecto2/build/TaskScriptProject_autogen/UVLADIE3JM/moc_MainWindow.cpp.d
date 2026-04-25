@@ -1,6 +1,9 @@
 C:/1S2026_LFPA_202303088/Proyecto2/build/TaskScriptProject_autogen/UVLADIE3JM/moc_MainWindow.cpp: C:/1S2026_LFPA_202303088/Proyecto2/src/MainWindow.h \
   C:/1S2026_LFPA_202303088/Proyecto2/build/TaskScriptProject_autogen/moc_predefs.h \
+  C:/1S2026_LFPA_202303088/Proyecto2/src/DataRemember.h \
+  C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.h \
   C:/1S2026_LFPA_202303088/Proyecto2/src/SyntaxAnalyzer.h \
+  C:/1S2026_LFPA_202303088/Proyecto2/src/Token.h \
   C:/msys64/mingw64/include/_mingw.h \
   C:/msys64/mingw64/include/_mingw_mac.h \
   C:/msys64/mingw64/include/_mingw_off_t.h \

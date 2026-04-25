@@ -12,20 +12,21 @@
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = nullptr);
+    public:
+        MainWindow(QWidget *parent = nullptr);
 
-private slots:
-    void handleAnalyze();   
-    void handleLoadFile();  
+    private slots:
+        void handleAnalyze();   
+        void handleLoadFile();  
 
-private:
-    QTextEdit *codeEditor;
-    QTableWidget *tokenTable;
-    QTableWidget *errorTable;
-    
-    void setupUI();
-    void updateTables(const std::vector<Token>& tokens);
+    private:
+        QTextEdit *codeEditor;
+        QTableWidget *tokenTable;
+        QTableWidget *errorTable;
+        BoardData lastParsedBoard;
+        
+        void setupUI();
+        void updateTables(const std::vector<Token>& tokens);
 };
 
 #endif

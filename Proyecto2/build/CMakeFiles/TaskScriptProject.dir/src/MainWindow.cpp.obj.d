@@ -425,7 +425,10 @@ CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.obj: \
  C:\1S2026_LFPA_202303088\Proyecto2\src\LexicalAnalyzer.h \
  C:\1S2026_LFPA_202303088\Proyecto2\src\Token.h \
  C:\1S2026_LFPA_202303088\Proyecto2\src\SyntaxAnalyzer.h \
+ C:\1S2026_LFPA_202303088\Proyecto2\src\DataRemember.h \
  C:\1S2026_LFPA_202303088\Proyecto2\src\ErrorManager.h \
+ C:\1S2026_LFPA_202303088\Proyecto2\src\ReportGenerator.h \
+ C:/msys64/mingw64/include/qt6/QtCore/QString \
  C:/msys64/mingw64/include/qt6/QtWidgets/QFileDialog \
  C:/msys64/mingw64/include/qt6/QtWidgets/qfiledialog.h \
  C:/msys64/mingw64/include/qt6/QtCore/qdir.h \

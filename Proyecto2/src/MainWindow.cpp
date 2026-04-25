@@ -2,6 +2,7 @@
 #include "LexicalAnalyzer.h" 
 #include "SyntaxAnalyzer.h" 
 #include "ErrorManager.h"
+#include "ReportGenerator.h"
 #include <QFileDialog>
 #include <QHeaderView>
 #include <QMessageBox>
@@ -72,7 +73,14 @@ void MainWindow::setupUI() {
     connect(btnExec, &QPushButton::clicked, this, &MainWindow::handleAnalyze);
     connect(btnExit, &QPushButton::clicked, this, &QWidget::close);
     connect(btnRepo, &QPushButton::clicked, [this]() {
-        QMessageBox::information(this, "Reportes", "Funcionalidad de reportes próximamente...");
+        QString dir = QFileDialog::getExistingDirectory(this, "Seleccionar carpeta para guardar reportes");
+        if (dir.isEmpty()) return;
+        
+        ReportGenerator::generateKanbanReport(lastParsedBoard, dir + "/1_tablero_kanban.html");
+        ReportGenerator::generateWorkloadReport(lastParsedBoard, dir + "/2_carga_trabajo.html");
+        ReportGenerator::generateErrorReport(dir + "/3_errores.html");
+
+        QMessageBox::information(this, "Éxito", "Reportes HTML generados en la carpeta seleccionada.");
     });
 }
 
@@ -112,6 +120,7 @@ void MainWindow::handleAnalyze() {
     LexicalAnalyzer lexer2(code.toStdString()); 
     SyntaxAnalyzer parser(lexer2);
     parser.parse();
+    lastParsedBoard = parser.getBoard();
 
     for (const auto& err : ErrorManager::errors) { 
         int row = errorTable->rowCount();

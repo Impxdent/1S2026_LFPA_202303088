@@ -13,7 +13,6 @@ void SyntaxAnalyzer::match(TokenType expected) {
         lookahead = lexer.nextToken();
     } else {
         ErrorManager::addError(lookahead.lexeme, "Sintáctico", "Se esperaba un token de tipo diferente", lookahead.line, lookahead.column);
-
         if (lookahead.type != TokenType::FIN_ARCHIVO) {
             lookahead = lexer.nextToken();
         }
@@ -26,11 +25,12 @@ void SyntaxAnalyzer::parse() {
 
 void SyntaxAnalyzer::programa() {
     match(TokenType::TABLERO);
+    board.name = lookahead.lexeme;
     match(TokenType::CADENA);
     match(TokenType::LLAVE_IZQ);
     columnas();
     match(TokenType::LLAVE_DER);
-    match(TokenType::PUNTO_COMA);
+    if(lookahead.type == TokenType::PUNTO_COMA) match(TokenType::PUNTO_COMA);
 }
 
 void SyntaxAnalyzer::columnas() {
@@ -42,6 +42,12 @@ void SyntaxAnalyzer::columnas() {
 
 void SyntaxAnalyzer::columna() {
     match(TokenType::COLUMNA);
+
+    ColumnData col;
+    col.name = lookahead.lexeme;
+    board.columns.push_back(col);
+    currentCol = &board.columns.back();
+
     match(TokenType::CADENA);
     match(TokenType::LLAVE_IZQ);
     
@@ -50,14 +56,13 @@ void SyntaxAnalyzer::columna() {
     }
     
     match(TokenType::LLAVE_DER);
-    match(TokenType::PUNTO_COMA);
+    if(lookahead.type == TokenType::PUNTO_COMA) match(TokenType::PUNTO_COMA);
 }
 
 void SyntaxAnalyzer::tareas() {
     tarea();
     if (lookahead.type == TokenType::COMA) {
-        match(TokenType::COMA);
-        
+        match(TokenType::COMA);     
         if (lookahead.type != TokenType::LLAVE_DER) {
             tareas();
         }
@@ -67,6 +72,12 @@ void SyntaxAnalyzer::tareas() {
 void SyntaxAnalyzer::tarea() {
     match(TokenType::TAREA);
     match(TokenType::DOS_PUNTOS);
+
+    TaskData t;
+    t.name = lookahead.lexeme;
+    currentCol->tasks.push_back(t);
+    currentTask = &currentCol->tasks.back();
+
     match(TokenType::CADENA);
     match(TokenType::CORCHETE_IZQ);
     atributos();
@@ -76,8 +87,7 @@ void SyntaxAnalyzer::tarea() {
 void SyntaxAnalyzer::atributos() {
     atributo();
     if (lookahead.type == TokenType::COMA) {
-        match(TokenType::COMA);
-        
+        match(TokenType::COMA);        
         if (lookahead.type != TokenType::CORCHETE_DER) {
             atributos();
         }
@@ -89,6 +99,7 @@ void SyntaxAnalyzer::atributo() {
         match(TokenType::PRIORIDAD);
         match(TokenType::DOS_PUNTOS);
         if (lookahead.type == TokenType::ALTA || lookahead.type == TokenType::MEDIA || lookahead.type == TokenType::BAJA) {
+            currentTask->priority = lookahead.lexeme;
             lookahead = lexer.nextToken();
         } else {
             ErrorManager::addError(lookahead.lexeme, "Sintáctico", "Prioridad no válida", lookahead.line, lookahead.column);
@@ -96,6 +107,7 @@ void SyntaxAnalyzer::atributo() {
     } else if (lookahead.type == TokenType::RESPONSABLE) {
         match(TokenType::RESPONSABLE);
         match(TokenType::DOS_PUNTOS);
+        currentTask->responsible = lookahead.lexeme;
         match(TokenType::CADENA);
     } else if (lookahead.type == TokenType::FECHA_LIMITE) {
         match(TokenType::FECHA_LIMITE);
@@ -109,15 +121,12 @@ void SyntaxAnalyzer::atributo() {
                 int mes = partes[1].toInt();
                 int dia = partes[2].toInt();
 
-                if (mes < 1 || mes > 12) {
-                    ErrorManager::addError(lookahead.lexeme, "Semántico", "Mes fuera de rango (1-12)", lookahead.line, lookahead.column);
-                }
-                if (dia < 1 || dia > 31) {
-                    ErrorManager::addError(lookahead.lexeme, "Semántico", "Día fuera de rango (1-31)", lookahead.line, lookahead.column);
-                }
+                if (mes < 1 || mes > 12) ErrorManager::addError(lookahead.lexeme, "Semántico", "Mes fuera de rango (1-12)", lookahead.line, lookahead.column);
+                if (dia < 1 || dia > 31) ErrorManager::addError(lookahead.lexeme, "Semántico", "Día fuera de rango (1-31)", lookahead.line, lookahead.column);
             }
         }
 
+        currentTask->dueDate = lookahead.lexeme;
         match(TokenType::FECHA);
     }
 }

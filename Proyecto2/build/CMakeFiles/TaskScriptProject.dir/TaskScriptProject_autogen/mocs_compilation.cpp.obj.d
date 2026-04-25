@@ -426,6 +426,7 @@ CMakeFiles/TaskScriptProject.dir/TaskScriptProject_autogen/mocs_compilation.cpp.
  C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.h \
  C:/1S2026_LFPA_202303088/Proyecto2/src/Token.h \
  C:/1S2026_LFPA_202303088/Proyecto2/src/SyntaxAnalyzer.h \
+ C:/1S2026_LFPA_202303088/Proyecto2/src/DataRemember.h \
  C:/msys64/mingw64/include/qt6/QtCore/qtmochelpers.h \
  C:/msys64/mingw64/include/qt6/QtCore/qtmocconstants.h \
  C:/msys64/mingw64/include/qt6/QtCore/q20algorithm.h

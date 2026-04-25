@@ -7,9 +7,11 @@ TaskScriptProject_autogen/timestamp: C:/1S2026_LFPA_202303088/Proyecto2/CMakeLis
   CMakeFiles/4.3.0/CMakeRCCompiler.cmake \
   CMakeFiles/4.3.0/CMakeSystem.cmake \
   TaskScriptProject_autogen/moc_predefs.h \
+  C:/1S2026_LFPA_202303088/Proyecto2/src/DataRemember.h \
   C:/1S2026_LFPA_202303088/Proyecto2/src/ErrorManager.cpp \
   C:/1S2026_LFPA_202303088/Proyecto2/src/ErrorManager.h \
   C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.cpp \
+  C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.h \
   C:/1S2026_LFPA_202303088/Proyecto2/src/MainWindow.cpp \
   C:/1S2026_LFPA_202303088/Proyecto2/src/MainWindow.h \
   C:/1S2026_LFPA_202303088/Proyecto2/src/SyntaxAnalyzer.cpp \
@@ -727,6 +729,28 @@ TaskScriptProject_autogen/timestamp: C:/1S2026_LFPA_202303088/Proyecto2/CMakeLis
   C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdbool.h
 
 
+C:/msys64/mingw64/include/c++/15.2.0/map:
+
+C:/msys64/mingw64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets.cmake:
+
+C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/ARMCC-DetermineCompiler.cmake:
+
+C:/msys64/mingw64/lib/cmake/Qt6/QtPublicSbomDepHelpers.cmake:
+
+C:/msys64/mingw64/include/qt6/QtCore/qiodevicebase.h:
+
+C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.cpp:
+
+C:/msys64/mingw64/lib/cmake/Qt6Gui/Qt6QJpegPluginTargets-relwithdebinfo.cmake:
+
+C:/msys64/mingw64/include/c++/15.2.0/bits/predefined_ops.h:
+
+C:/1S2026_LFPA_202303088/Proyecto2/src/DataRemember.h:
+
+C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/Fujitsu-DetermineCompiler.cmake:
+
+C:/Program\ Files/CMake/share/cmake-4.3/Modules/Platform/Windows-GNU-C-ABI.cmake:
+
 C:/msys64/mingw64/include/qt6/QtWidgets/qboxlayout.h:
 
 C:/msys64/mingw64/include/qt6/QtWidgets/qabstractslider.h:
@@ -799,17 +823,9 @@ C:/1S2026_LFPA_202303088/Proyecto2/src/ErrorManager.cpp:
 
 C:/1S2026_LFPA_202303088/Proyecto2/src/ErrorManager.h:
 
-C:/msys64/mingw64/include/c++/15.2.0/map:
+C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.h:
 
-C:/msys64/mingw64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets.cmake:
-
-C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/ARMCC-DetermineCompiler.cmake:
-
-C:/msys64/mingw64/lib/cmake/Qt6/QtPublicSbomDepHelpers.cmake:
-
-C:/msys64/mingw64/include/qt6/QtCore/qiodevicebase.h:
-
-C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.cpp:
+C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h:
 
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/CMakeDetermineCompilerId.cmake:
 
@@ -943,8 +959,6 @@ C:/msys64/mingw64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsConfig.cmake:
 
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/CMakeDetermineSystem.cmake:
 
-C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/CMakeCommonCompilerMacros.cmake:
-
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/CMakeFindBinUtils.cmake:
 
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake:
@@ -1015,6 +1029,8 @@ C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/ADSP-DetermineCompiler.
 
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/Bruce-C-DetermineCompiler.cmake:
 
+C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/CMakeCommonCompilerMacros.cmake:
+
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/Clang-DetermineCompiler.cmake:
 
 C:/msys64/mingw64/include/c++/15.2.0/clocale:
@@ -1040,14 +1056,6 @@ C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/CrayClang-DetermineComp
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/Diab-DetermineCompiler.cmake:
 
 C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/Embarcadero-DetermineCompiler.cmake:
-
-C:/msys64/mingw64/lib/cmake/Qt6Gui/Qt6QJpegPluginTargets-relwithdebinfo.cmake:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/predefined_ops.h:
-
-C:/Program\ Files/CMake/share/cmake-4.3/Modules/Compiler/Fujitsu-DetermineCompiler.cmake:
-
-C:/Program\ Files/CMake/share/cmake-4.3/Modules/Platform/Windows-GNU-C-ABI.cmake:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/stl_set.h:
 
@@ -1520,8 +1528,6 @@ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_uninitialized.h:
 C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h:
 
 C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf.tcc:
-
-C:/msys64/mingw64/include/c++/15.2.0/bits/streambuf_iterator.h:
 
 C:/msys64/mingw64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargetsPrecheck.cmake:
 

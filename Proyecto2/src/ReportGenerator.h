@@ -1,21 +1,14 @@
 #ifndef REPORTGENERATOR_H
 #define REPORTGENERATOR_H
 
-#include "Token.h"
-#include "ErrorManager.h"
-#include <vector>
-#include <string>
+#include "DataRemember.h"
+#include <QString>
 
 class ReportGenerator {
 public:
-    static void generateTokenReport(const std::string& filename, const std::vector<Token>& tokens);
-    
-    static void generateErrorReport(const std::string& filename, const std::vector<CustomError>& errors);
-    
-    static void generateKanbanReport(const std::string& filename);
-
-private:
-    static std::string getCSS(); 
+    static void generateKanbanReport(const BoardData& board, const QString& path);
+    static void generateWorkloadReport(const BoardData& board, const QString& path);
+    static void generateErrorReport(const QString& path);
 };
 
 #endif

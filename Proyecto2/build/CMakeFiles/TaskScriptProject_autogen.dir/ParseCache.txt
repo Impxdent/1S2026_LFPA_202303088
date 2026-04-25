@@ -3,8 +3,11 @@ C:/1S2026_LFPA_202303088/Proyecto2/src/ErrorManager.h
 C:/1S2026_LFPA_202303088/Proyecto2/src/MainWindow.h
  mmc:Q_OBJECT
  mdp:C:/1S2026_LFPA_202303088/Proyecto2/build/TaskScriptProject_autogen/moc_predefs.h
+ mdp:C:/1S2026_LFPA_202303088/Proyecto2/src/DataRemember.h
+ mdp:C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.h
  mdp:C:/1S2026_LFPA_202303088/Proyecto2/src/MainWindow.h
  mdp:C:/1S2026_LFPA_202303088/Proyecto2/src/SyntaxAnalyzer.h
+ mdp:C:/1S2026_LFPA_202303088/Proyecto2/src/Token.h
  mdp:C:/msys64/mingw64/include/_mingw.h
  mdp:C:/msys64/mingw64/include/_mingw_mac.h
  mdp:C:/msys64/mingw64/include/_mingw_off_t.h
@@ -429,3 +432,6 @@ C:/1S2026_LFPA_202303088/Proyecto2/src/SyntaxAnalyzer.cpp
 C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.cpp
 C:/1S2026_LFPA_202303088/Proyecto2/src/Token.cpp
 C:/1S2026_LFPA_202303088/Proyecto2/src/main.cpp
+C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.h
+C:/1S2026_LFPA_202303088/Proyecto2/src/ReportGenerator.h
+C:/1S2026_LFPA_202303088/Proyecto2/src/ReportGenerator.cpp

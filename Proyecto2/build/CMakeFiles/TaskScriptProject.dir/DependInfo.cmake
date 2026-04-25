@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/1S2026_LFPA_202303088/Proyecto2/src/ErrorManager.cpp" "CMakeFiles/TaskScriptProject.dir/src/ErrorManager.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/ErrorManager.cpp.obj.d"
   "C:/1S2026_LFPA_202303088/Proyecto2/src/LexicalAnalyzer.cpp" "CMakeFiles/TaskScriptProject.dir/src/LexicalAnalyzer.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/LexicalAnalyzer.cpp.obj.d"
   "C:/1S2026_LFPA_202303088/Proyecto2/src/MainWindow.cpp" "CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.obj.d"
+  "C:/1S2026_LFPA_202303088/Proyecto2/src/ReportGenerator.cpp" "CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.obj.d"
   "C:/1S2026_LFPA_202303088/Proyecto2/src/SyntaxAnalyzer.cpp" "CMakeFiles/TaskScriptProject.dir/src/SyntaxAnalyzer.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/SyntaxAnalyzer.cpp.obj.d"
   "C:/1S2026_LFPA_202303088/Proyecto2/src/Token.cpp" "CMakeFiles/TaskScriptProject.dir/src/Token.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/Token.cpp.obj.d"
   "C:/1S2026_LFPA_202303088/Proyecto2/src/main.cpp" "CMakeFiles/TaskScriptProject.dir/src/main.cpp.obj" "gcc" "CMakeFiles/TaskScriptProject.dir/src/main.cpp.obj.d"

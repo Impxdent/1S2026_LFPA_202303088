@@ -250,6 +250,30 @@ src/MainWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TaskScriptProject.dir\build.make CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.s
 .PHONY : src/MainWindow.cpp.s
 
+src/ReportGenerator.obj: src/ReportGenerator.cpp.obj
+.PHONY : src/ReportGenerator.obj
+
+# target to build an object file
+src/ReportGenerator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TaskScriptProject.dir\build.make CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.obj
+.PHONY : src/ReportGenerator.cpp.obj
+
+src/ReportGenerator.i: src/ReportGenerator.cpp.i
+.PHONY : src/ReportGenerator.i
+
+# target to preprocess a source file
+src/ReportGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TaskScriptProject.dir\build.make CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.i
+.PHONY : src/ReportGenerator.cpp.i
+
+src/ReportGenerator.s: src/ReportGenerator.cpp.s
+.PHONY : src/ReportGenerator.s
+
+# target to generate assembly for a file
+src/ReportGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TaskScriptProject.dir\build.make CMakeFiles/TaskScriptProject.dir/src/ReportGenerator.cpp.s
+.PHONY : src/ReportGenerator.cpp.s
+
 src/SyntaxAnalyzer.obj: src/SyntaxAnalyzer.cpp.obj
 .PHONY : src/SyntaxAnalyzer.obj
 
@@ -345,6 +369,9 @@ help:
 	@echo ... src/MainWindow.obj
 	@echo ... src/MainWindow.i
 	@echo ... src/MainWindow.s
+	@echo ... src/ReportGenerator.obj
+	@echo ... src/ReportGenerator.i
+	@echo ... src/ReportGenerator.s
 	@echo ... src/SyntaxAnalyzer.obj
 	@echo ... src/SyntaxAnalyzer.i
 	@echo ... src/SyntaxAnalyzer.s

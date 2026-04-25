@@ -15,6 +15,7 @@ add_executable(TaskScriptProject
     src/SyntaxAnalyzer.cpp
     src/Token.cpp
     src/ErrorManager.cpp
+    src/ReportGenerator.cpp
 )
 
 target_include_directories(TaskScriptProject PRIVATE src)

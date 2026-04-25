@@ -106,6 +106,7 @@ CMakeFiles/TaskScriptProject.dir/src/SyntaxAnalyzer.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_bvector.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/vector.tcc \
+ C:\1S2026_LFPA_202303088\Proyecto2\src\DataRemember.h \
  C:/msys64/mingw64/include/c++/15.2.0/memory \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_tempbuf.h \
  C:/msys64/mingw64/include/c++/15.2.0/bits/stl_raw_storage_iter.h \

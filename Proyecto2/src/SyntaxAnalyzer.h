@@ -2,12 +2,17 @@
 #define SYNTAXANALYZER_H
 
 #include "LexicalAnalyzer.h"
+#include "DataRemember.h"
 #include <memory>
 
 class SyntaxAnalyzer {
 private:
     LexicalAnalyzer& lexer;
     Token lookahead;
+
+    BoardData board;
+    ColumnData* currentCol = nullptr;
+    TaskData* currentTask = nullptr;
 
     void match(TokenType expected);
     
@@ -22,6 +27,8 @@ private:
 public:
     SyntaxAnalyzer(LexicalAnalyzer& lex);
     void parse();
+
+    BoardData getBoard() const { return board; }
 };
 
 #endif
