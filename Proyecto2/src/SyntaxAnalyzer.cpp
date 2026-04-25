@@ -1,6 +1,8 @@
 #include "SyntaxAnalyzer.h"
 #include "ErrorManager.h"
 #include <iostream>
+#include <QString>      
+#include <QStringList>  
 
 SyntaxAnalyzer::SyntaxAnalyzer(LexicalAnalyzer& lex) : lexer(lex) {
     lookahead = lexer.nextToken();
@@ -42,7 +44,11 @@ void SyntaxAnalyzer::columna() {
     match(TokenType::COLUMNA);
     match(TokenType::CADENA);
     match(TokenType::LLAVE_IZQ);
-    tareas();
+    
+    if (lookahead.type == TokenType::TAREA) {
+        tareas();
+    }
+    
     match(TokenType::LLAVE_DER);
     match(TokenType::PUNTO_COMA);
 }
@@ -51,7 +57,10 @@ void SyntaxAnalyzer::tareas() {
     tarea();
     if (lookahead.type == TokenType::COMA) {
         match(TokenType::COMA);
-        tareas();
+        
+        if (lookahead.type != TokenType::LLAVE_DER) {
+            tareas();
+        }
     }
 }
 
@@ -68,7 +77,10 @@ void SyntaxAnalyzer::atributos() {
     atributo();
     if (lookahead.type == TokenType::COMA) {
         match(TokenType::COMA);
-        atributos();
+        
+        if (lookahead.type != TokenType::CORCHETE_DER) {
+            atributos();
+        }
     }
 }
 
@@ -88,6 +100,24 @@ void SyntaxAnalyzer::atributo() {
     } else if (lookahead.type == TokenType::FECHA_LIMITE) {
         match(TokenType::FECHA_LIMITE);
         match(TokenType::DOS_PUNTOS);
+        
+        if (lookahead.type == TokenType::FECHA) {
+            QString str = QString::fromStdString(lookahead.lexeme);
+            QStringList partes = str.split("-");
+            
+            if (partes.size() == 3) {
+                int mes = partes[1].toInt();
+                int dia = partes[2].toInt();
+
+                if (mes < 1 || mes > 12) {
+                    ErrorManager::addError(lookahead.lexeme, "Semántico", "Mes fuera de rango (1-12)", lookahead.line, lookahead.column);
+                }
+                if (dia < 1 || dia > 31) {
+                    ErrorManager::addError(lookahead.lexeme, "Semántico", "Día fuera de rango (1-31)", lookahead.line, lookahead.column);
+                }
+            }
+        }
+
         match(TokenType::FECHA);
     }
 }

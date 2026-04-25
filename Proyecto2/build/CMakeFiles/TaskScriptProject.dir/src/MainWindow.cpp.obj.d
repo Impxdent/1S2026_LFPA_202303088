@@ -476,4 +476,6 @@ CMakeFiles/TaskScriptProject.dir/src/MainWindow.cpp.obj: \
  C:/msys64/mingw64/include/qt6/QtWidgets/qdialogbuttonbox.h \
  C:/msys64/mingw64/include/qt6/QtWidgets/QLabel \
  C:/msys64/mingw64/include/qt6/QtWidgets/qlabel.h \
- C:/msys64/mingw64/include/qt6/QtGui/qpicture.h
+ C:/msys64/mingw64/include/qt6/QtGui/qpicture.h \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QHBoxLayout \
+ C:/msys64/mingw64/include/qt6/QtWidgets/QTabWidget
