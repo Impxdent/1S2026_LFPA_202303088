@@ -15,6 +15,7 @@ struct Paciente {
     int edad = 0;
     QString tipo_sangre;
     int habitacion = 0;
+    QString genero;
     
     bool tiene_diagnostico = false;
     Diagnostico diagnostico;

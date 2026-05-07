@@ -25,6 +25,13 @@ Hospital DataExtractor::extraerDatos(const QList<Token>& tokens) {
             hospital.pacientes.append(p);
             i = j; 
         }
+        if (atr == "genero" && i < tokens.size() && tokens[i].tipo != Coma && tokens[j].tipo != DosPuntos){
+            QString valorGenero = tokens[i].lexema;
+            if (valorGenero == "MASCULINO" || valorGenero == "FEMENINO"){
+                p.genero = valorGenero;
+            }
+            i++;
+        }
 
         else if (lexema == "medico" && i + 2 < tokens.size() && tokens[i+1].tipo == DosPuntos) {
             Medico m;
