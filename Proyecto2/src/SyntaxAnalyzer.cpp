@@ -1,15 +1,17 @@
 #include "SyntaxAnalyzer.h"
 #include "ErrorManager.h"
-#include <iostream>
-#include <QString>      
-#include <QStringList>  
+#include <QString>
+#include <QStringList>
 
 SyntaxAnalyzer::SyntaxAnalyzer(LexicalAnalyzer& lex) : lexer(lex) {
     lookahead = lexer.nextToken();
 }
 
-void SyntaxAnalyzer::match(TokenType expected) {
+void SyntaxAnalyzer::match(TokenType expected, std::shared_ptr<TreeNode> parent) {
     if (lookahead.type == expected) {
+        if (parent) {
+            parent->children.push_back(std::make_shared<TreeNode>(lookahead.lexeme, true));
+        }
         lookahead = lexer.nextToken();
     } else {
         ErrorManager::addError(lookahead.lexeme, "Sintáctico", "Se esperaba un token de tipo diferente", lookahead.line, lookahead.column);
@@ -20,113 +22,127 @@ void SyntaxAnalyzer::match(TokenType expected) {
 }
 
 void SyntaxAnalyzer::parse() {
-    programa();
+    programa(nullptr);
 }
 
-void SyntaxAnalyzer::programa() {
-    match(TokenType::TABLERO);
-    board.name = lookahead.lexeme;
-    match(TokenType::CADENA);
-    match(TokenType::LLAVE_IZQ);
-    columnas();
-    match(TokenType::LLAVE_DER);
-    if(lookahead.type == TokenType::PUNTO_COMA) match(TokenType::PUNTO_COMA);
+void SyntaxAnalyzer::programa(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<programa>", false);
+    parseTreeRoot = node; 
+
+    match(TokenType::TABLERO, node);
+    board.name = lookahead.lexeme; 
+    match(TokenType::CADENA, node);
+    match(TokenType::LLAVE_IZQ, node);
+    
+    columnas(node);
+    
+    match(TokenType::LLAVE_DER, node);
+    if(lookahead.type == TokenType::PUNTO_COMA) match(TokenType::PUNTO_COMA, node);
 }
 
-void SyntaxAnalyzer::columnas() {
-    columna();
+void SyntaxAnalyzer::columnas(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<columnas>", false);
+    parent->children.push_back(node);
+    
+    columna(node);
     if (lookahead.type == TokenType::COLUMNA) {
-        columnas();
+        columnas(node);
     }
 }
 
-void SyntaxAnalyzer::columna() {
-    match(TokenType::COLUMNA);
+void SyntaxAnalyzer::columna(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<columna>", false);
+    parent->children.push_back(node);
 
+    match(TokenType::COLUMNA, node);
+    
     ColumnData col;
-    col.name = lookahead.lexeme;
+    col.name = lookahead.lexeme; 
     board.columns.push_back(col);
-    currentCol = &board.columns.back();
-
-    match(TokenType::CADENA);
-    match(TokenType::LLAVE_IZQ);
+    currentCol = &board.columns.back(); 
+    
+    match(TokenType::CADENA, node);
+    match(TokenType::LLAVE_IZQ, node);
     
     if (lookahead.type == TokenType::TAREA) {
-        tareas();
+        tareas(node);
     }
     
-    match(TokenType::LLAVE_DER);
-    if(lookahead.type == TokenType::PUNTO_COMA) match(TokenType::PUNTO_COMA);
+    match(TokenType::LLAVE_DER, node);
+    if(lookahead.type == TokenType::PUNTO_COMA) match(TokenType::PUNTO_COMA, node);
 }
 
-void SyntaxAnalyzer::tareas() {
-    tarea();
+void SyntaxAnalyzer::tareas(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<tareas>", false);
+    parent->children.push_back(node);
+
+    tarea(node);
     if (lookahead.type == TokenType::COMA) {
-        match(TokenType::COMA);     
+        match(TokenType::COMA, node);
         if (lookahead.type != TokenType::LLAVE_DER) {
-            tareas();
+            tareas(node);
         }
     }
 }
 
-void SyntaxAnalyzer::tarea() {
-    match(TokenType::TAREA);
-    match(TokenType::DOS_PUNTOS);
+void SyntaxAnalyzer::tarea(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<tarea>", false);
+    parent->children.push_back(node);
 
+    match(TokenType::TAREA, node);
+    match(TokenType::DOS_PUNTOS, node);
+    
     TaskData t;
-    t.name = lookahead.lexeme;
+    t.name = lookahead.lexeme; 
     currentCol->tasks.push_back(t);
-    currentTask = &currentCol->tasks.back();
-
-    match(TokenType::CADENA);
-    match(TokenType::CORCHETE_IZQ);
-    atributos();
-    match(TokenType::CORCHETE_DER);
+    currentTask = &currentCol->tasks.back(); 
+    
+    match(TokenType::CADENA, node);
+    match(TokenType::CORCHETE_IZQ, node);
+    atributos(node);
+    match(TokenType::CORCHETE_DER, node);
 }
 
-void SyntaxAnalyzer::atributos() {
-    atributo();
+void SyntaxAnalyzer::atributos(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<atributos>", false);
+    parent->children.push_back(node);
+
+    atributo(node);
     if (lookahead.type == TokenType::COMA) {
-        match(TokenType::COMA);        
+        match(TokenType::COMA, node);
         if (lookahead.type != TokenType::CORCHETE_DER) {
-            atributos();
+            atributos(node);
         }
     }
 }
 
-void SyntaxAnalyzer::atributo() {
+void SyntaxAnalyzer::atributo(std::shared_ptr<TreeNode> parent) {
+    std::shared_ptr<TreeNode> node = std::make_shared<TreeNode>("<atributo>", false);
+    parent->children.push_back(node);
+
     if (lookahead.type == TokenType::PRIORIDAD) {
-        match(TokenType::PRIORIDAD);
-        match(TokenType::DOS_PUNTOS);
+        match(TokenType::PRIORIDAD, node);
+        match(TokenType::DOS_PUNTOS, node);
+        
         if (lookahead.type == TokenType::ALTA || lookahead.type == TokenType::MEDIA || lookahead.type == TokenType::BAJA) {
-            currentTask->priority = lookahead.lexeme;
+            currentTask->priority = lookahead.lexeme; 
+            node->children.push_back(std::make_shared<TreeNode>(lookahead.lexeme, true));
             lookahead = lexer.nextToken();
         } else {
             ErrorManager::addError(lookahead.lexeme, "Sintáctico", "Prioridad no válida", lookahead.line, lookahead.column);
         }
     } else if (lookahead.type == TokenType::RESPONSABLE) {
-        match(TokenType::RESPONSABLE);
-        match(TokenType::DOS_PUNTOS);
-        currentTask->responsible = lookahead.lexeme;
-        match(TokenType::CADENA);
-    } else if (lookahead.type == TokenType::FECHA_LIMITE) {
-        match(TokenType::FECHA_LIMITE);
-        match(TokenType::DOS_PUNTOS);
+        match(TokenType::RESPONSABLE, node);
+        match(TokenType::DOS_PUNTOS, node);
         
-        if (lookahead.type == TokenType::FECHA) {
-            QString str = QString::fromStdString(lookahead.lexeme);
-            QStringList partes = str.split("-");
-            
-            if (partes.size() == 3) {
-                int mes = partes[1].toInt();
-                int dia = partes[2].toInt();
-
-                if (mes < 1 || mes > 12) ErrorManager::addError(lookahead.lexeme, "Semántico", "Mes fuera de rango (1-12)", lookahead.line, lookahead.column);
-                if (dia < 1 || dia > 31) ErrorManager::addError(lookahead.lexeme, "Semántico", "Día fuera de rango (1-31)", lookahead.line, lookahead.column);
-            }
-        }
-
-        currentTask->dueDate = lookahead.lexeme;
-        match(TokenType::FECHA);
+        currentTask->responsible = lookahead.lexeme; 
+        match(TokenType::CADENA, node);
+        
+    } else if (lookahead.type == TokenType::FECHA_LIMITE) {
+        match(TokenType::FECHA_LIMITE, node);
+        match(TokenType::DOS_PUNTOS, node);
+        
+        currentTask->dueDate = lookahead.lexeme; 
+        match(TokenType::FECHA, node);
     }
 }

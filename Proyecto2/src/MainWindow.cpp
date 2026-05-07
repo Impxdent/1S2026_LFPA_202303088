@@ -79,8 +79,9 @@ void MainWindow::setupUI() {
         ReportGenerator::generateKanbanReport(lastParsedBoard, dir + "/1_tablero_kanban.html");
         ReportGenerator::generateWorkloadReport(lastParsedBoard, dir + "/2_carga_trabajo.html");
         ReportGenerator::generateErrorReport(dir + "/3_errores.html");
+        ReportGenerator::generateDOT(lastParsedTree, dir + "/arbol.dot");
 
-        QMessageBox::information(this, "Éxito", "Reportes HTML generados en la carpeta seleccionada.");
+        QMessageBox::information(this, "Éxito", "Reportes HTML y árbol generados en la carpeta seleccionada.");
     });
 }
 
@@ -121,6 +122,7 @@ void MainWindow::handleAnalyze() {
     SyntaxAnalyzer parser(lexer2);
     parser.parse();
     lastParsedBoard = parser.getBoard();
+    lastParsedTree = parser.getTreeRoot();
 
     for (const auto& err : ErrorManager::errors) { 
         int row = errorTable->rowCount();

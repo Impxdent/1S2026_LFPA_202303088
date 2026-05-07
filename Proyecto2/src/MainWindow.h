@@ -27,6 +27,8 @@ class MainWindow : public QMainWindow {
         
         void setupUI();
         void updateTables(const std::vector<Token>& tokens);
+
+        std::shared_ptr<TreeNode> lastParsedTree;
 };
 
 #endif

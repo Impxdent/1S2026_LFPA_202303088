@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMap>
+#include <map>
 
 //REPORTE KANBAN
 void ReportGenerator::generateKanbanReport(const BoardData& board, const QString& path) {
@@ -135,4 +136,52 @@ void ReportGenerator::generateErrorReport(const QString& path) {
     }
 
     out << "</table></body></html>";
+}
+
+//ARBOL
+void ReportGenerator::generateDOT(std::shared_ptr<TreeNode> root, const QString& path) {
+    if (!root) return;
+    QFile file(path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) return;
+    QTextStream out(&file);
+
+    out << "digraph ArbolDerivacion {\n";
+    out << "    rankdir=TB;\n";
+    out << "    node [shape=box, style=filled, fontname=\"Arial\"];\n\n";
+
+    int idCounter = 0;
+    std::map<TreeNode*, int> nodeIds;
+
+    auto printNodes = [&](auto& self, std::shared_ptr<TreeNode> node) -> void {
+        if (!node) return;
+        nodeIds[node.get()] = idCounter++;
+        
+        QString label = QString::fromStdString(node->label);
+        label.replace("\"", "\\\""); 
+
+        if (node->isTerminal) {
+            out << "    n" << nodeIds[node.get()] << " [label=\"" << label << "\", fillcolor=\"#D6EAF8\"];\n";
+        } else {
+            out << "    n" << nodeIds[node.get()] << " [label=\"" << label << "\", fillcolor=\"#2E75B6\", fontcolor=white];\n";
+        }
+
+        for (auto child : node->children) self(self, child);
+    };
+    printNodes(printNodes, root);
+    out << "\n";
+
+    auto printEdges = [&](auto& self, std::shared_ptr<TreeNode> node) -> void {
+        if (!node) return;
+        if (!node->children.empty()) {
+            out << "    n" << nodeIds[node.get()] << " -> {";
+            for (auto child : node->children) {
+                out << " n" << nodeIds[child.get()];
+            }
+            out << " };\n";
+        }
+        for (auto child : node->children) self(self, child);
+    };
+    printEdges(printEdges, root);
+    
+    out << "}\n";
 }
